@@ -364,6 +364,3 @@ WITH CSV DELIMITER ';';
 
 
 */
-
-
-

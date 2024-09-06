@@ -172,133 +172,240 @@ INSERT INTO Categoria (categoria, descricao) VALUES
 	('Literatura Clássica', 'Obras literárias que são consideradas clássicas e influentes.'),
 	('Terror', 'Livros que provocam medo e inquietação.');
 	
--- Inserindo todos os livros e seus autores na tabela Livros_Autor
 INSERT INTO Livros_Autor (autor, livro) VALUES
-	-- C.S. Lewis
+	('C.S. Lewis', 'As Crônicas de Nárnia'),
 	('C.S. Lewis', 'Cartas de um Diabo a Seu Aprendiz'),
-	('C.S. Lewis', 'Perelandra'),
-	('C.S. Lewis', 'Os Quatro Amores'),
-	('C.S. Lewis', 'O Retorno do Rei'),
-	('C.S. Lewis', 'As Aventuras de Tom Bombadil'),
-	('C.S. Lewis', 'A Última Batalha'),
-	('C.S. Lewis', 'O Cavalo e Seu Menino'),
-
-	-- J.R.R. Tolkien
 	('J.R.R. Tolkien', 'O Senhor dos Anéis: A Sociedade do Anel'),
 	('J.R.R. Tolkien', 'O Hobbit'),
-	('J.R.R. Tolkien', 'Silmarillion'),
-	('J.R.R. Tolkien', 'Os Filhos de Húrin'),
-
-	-- Rick Riordan
 	('Rick Riordan', 'Percy Jackson e o Ladrão de Raios'),
 	('Rick Riordan', 'O Herói Perdido'),
-	('Rick Riordan', 'A Pirâmide Vermelha'),
-	('Rick Riordan', 'O Sangue do Olimpo'),
-
-	-- Suzanne Collins
 	('Suzanne Collins', 'Jogos Vorazes'),
 	('Suzanne Collins', 'Em Chamas'),
-	('Suzanne Collins', 'A Balada dos Pássaros e das Serpentes'),
-	('Suzanne Collins', 'Grega'),
-
-	-- Ali Hazelwood
 	('Ali Hazelwood', 'The Love Hypothesis'),
 	('Ali Hazelwood', 'Love on the Brain'),
-	('Ali Hazelwood', 'Below Zero'),
-	('Ali Hazelwood', 'Stuck with You'),
-
-	-- Taylor Jenkins Reid
 	('Taylor Jenkins Reid', 'Os Sete Maridos de Evelyn Hugo'),
 	('Taylor Jenkins Reid', 'Malibu Renasce'),
-	('Taylor Jenkins Reid', 'Daisy Jones & The Six'),
-	('Taylor Jenkins Reid', 'Carrie Soto Está de Volta'),
-
-	-- Jane Austen
 	('Jane Austen', 'Orgulho e Preconceito'),
 	('Jane Austen', 'Razão e Sensibilidade'),
-	('Jane Austen', 'Mansfield Park'),
-	('Jane Austen', 'Emma'),
-	('Jane Austen', 'Lady Susan'),
-	('Jane Austen', 'Persuasão'),
-
-	-- Elena Armas
 	('Elena Armas', 'O Encontro da Espanha'),
 	('Elena Armas', 'O Amor por Paris'),
-	('Elena Armas', 'The Spanish Love Deception'),
-	('Elena Armas', 'The American Roommate Experiment'),
-
-	-- Emily Henry
 	('Emily Henry', 'Beach Read'),
 	('Emily Henry', 'People We Meet on Vacation'),
-	('Emily Henry', 'Book Lovers'),
-	('Emily Henry', 'Happy Place'),
-
-	-- Agatha Christie
 	('Agatha Christie', 'Assassinato no Expresso do Oriente'),
 	('Agatha Christie', 'Morte no Nilo'),
-	('Agatha Christie', 'O Mistério dos Sete Relógios'),
-	('Agatha Christie', 'Morte na Praia'),
-
-	-- George Orwell
 	('George Orwell', '1984'),
 	('George Orwell', 'A Revolução dos Bichos'),
-
-	-- J.K. Rowling
 	('J.K. Rowling', 'Harry Potter e a Pedra Filosofal'),
 	('J.K. Rowling', 'Harry Potter e a Câmara Secreta'),
-	('J.K. Rowling', 'Harry Potter e o Prisioneiro de Azkaban'),
-	('J.K. Rowling', 'Harry Potter e o Cálice de Fogo'),
-
-	-- F. Scott Fitzgerald
 	('F. Scott Fitzgerald', 'O Grande Gatsby'),
 	('F. Scott Fitzgerald', 'Suave é a Noite'),
-	('F. Scott Fitzgerald', 'Contos da Era do Jazz'),
-	('F. Scott Fitzgerald', 'O Último Magnata'),
-
-	-- Gabriel García Márquez
 	('Gabriel García Márquez', 'Cem Anos de Solidão'),
 	('Gabriel García Márquez', 'O Amor nos Tempos do Cólera'),
-	('Gabriel García Márquez', 'O Outono do Patriarca'),
-	('Gabriel García Márquez', 'Crônica de uma Morte Anunciada'),
-
-	-- Haruki Murakami
 	('Haruki Murakami', 'Norwegian Wood'),
 	('Haruki Murakami', 'Kafka à Beira-mar'),
-	('Haruki Murakami', '1Q84'),
-	('Haruki Murakami', 'Caçando Carneiros'),
-
-	-- Margaret Atwood
 	('Margaret Atwood', 'O Conto da Aia'),
-	('Margaret Atwood', 'Orix e Crake'),
 	('Margaret Atwood', 'Vulgo Grace'),
-
-	-- Chimamanda Ngozi Adichie
 	('Chimamanda Ngozi Adichie', 'Americanah'),
 	('Chimamanda Ngozi Adichie', 'Meio Sol Amarelo'),
-	('Chimamanda Ngozi Adichie', 'No Seu Pescoço'),
-	('Chimamanda Ngozi Adichie', 'Zikora'),
-
-	-- Isabel Allende
 	('Isabel Allende', 'A Casa dos Espíritos'),
 	('Isabel Allende', 'Paula'),
-	('Isabel Allende', 'De Amor e de Sombra'),
-	('Isabel Allende', 'A Ilha Sob o Mar'),
-
-	-- Paulo Coelho
 	('Paulo Coelho', 'O Alquimista'),
 	('Paulo Coelho', 'Brida'),
-	('Paulo Coelho', 'Diário de um Mago'),
-	('Paulo Coelho', 'O Zahir'),
-
-	-- Leo Tolstoy
 	('Leo Tolstoy', 'Guerra e Paz'),
 	('Leo Tolstoy', 'Anna Karenina'),
+	('C.S. Lewis', 'Perelandra'),
+	('C.S. Lewis', 'Os Quatro Amores'),
+	('J.R.R. Tolkien', 'O Retorno do Rei'),
+	('J.R.R. Tolkien', 'As Aventuras de Tom Bombadil'),
+	('Rick Riordan', 'A Marca de Atena'),
+	('Rick Riordan', 'A Sombra da Serpente'),
+	('Suzanne Collins', 'A Esperança'),
+	('Suzanne Collins', 'O Canto da Cornucópia'),
+	('Ali Hazelwood', 'Below Zero'),
+	('Ali Hazelwood', 'Stuck with You'),
+	('Taylor Jenkins Reid', 'Daisy Jones & The Six'),
+	('Taylor Jenkins Reid', 'Carrie Soto Está de Volta'),
+	('Jane Austen', 'Mansfield Park'),
+	('Jane Austen', 'Emma'),
+	('Elena Armas', 'The Spanish Love Deception'),
+	('Elena Armas', 'The American Roommate Experiment'),
+	('Emily Henry', 'Book Lovers'),
+	('Emily Henry', 'Happy Place'),
+	('Agatha Christie', 'O Mistério dos Sete Relógios'),
+	('Agatha Christie', 'Morte na Praia'),
+	('George Orwell', 'Homage to Catalonia'),
+	('George Orwell', 'Keep the Aspidistra Flying'),
+	('J.K. Rowling', 'Harry Potter e o Prisioneiro de Azkaban'),
+	('J.K. Rowling', 'Harry Potter e o Cálice de Fogo'),
+	('F. Scott Fitzgerald', 'Contos da Era do Jazz'),
+	('F. Scott Fitzgerald', 'O Último Magnata'),
+	('Gabriel García Márquez', 'O Outono do Patriarca'),
+	('Gabriel García Márquez', 'Crônica de uma Morte Anunciada'),
+	('Haruki Murakami', '1Q84'),
+	('Haruki Murakami', 'Caçando Carneiros'),
+	('Margaret Atwood', 'O Assassino Cego'),
+	('Margaret Atwood', 'Orix e Crake'),
+	('Chimamanda Ngozi Adichie', 'No Seu Pescoço'),
+	('Chimamanda Ngozi Adichie', 'Zikora'),
+	('Isabel Allende', 'De Amor e de Sombra'),
+	('Isabel Allende', 'A Ilha Sob o Mar'),
+	('Paulo Coelho', 'Diário de um Mago'),
+	('Paulo Coelho', 'O Zahir'),
 	('Leo Tolstoy', 'A Morte de Ivan Ilitch'),
-	('Leo Tolstoy', 'Ressurreição');
+	('Leo Tolstoy', 'Ressurreição'),
+	('C.S. Lewis', 'A Última Batalha'),
+	('C.S. Lewis', 'O Cavalo e Seu Menino'),
+	('J.R.R. Tolkien', 'Silmarillion'),
+	('J.R.R. Tolkien', 'Os Filhos de Húrin'),
+	('Rick Riordan', 'O Sangue do Olimpo'),
+	('Rick Riordan', 'A Pirâmide Vermelha'),
+	('Suzanne Collins', 'A Balada dos Pássaros e das Serpentes'),
+	('Suzanne Collins', 'Grega'),
+	('Ali Hazelwood', 'The STEMinist Novellas'),
+	('Ali Hazelwood', 'Missão Desastre'),
+	('Taylor Jenkins Reid', 'Talvez em Outro Lugar'),
+	('Taylor Jenkins Reid', 'E Se Fosse a Gente?'),
+	('Jane Austen', 'Lady Susan'),
+	('Jane Austen', 'Persuasão'),
+	('Elena Armas', 'Aconteceu Um Verão'),
+	('Elena Armas', 'O Amor que Sinto'),
+	('Emily Henry', 'You and Me on Vacation'),
+	('Emily Henry', 'Noivos à Força'),
+	('Agatha Christie', 'Os Elefantes Não Esquecem'),
+	('Agatha Christie', 'O Misterioso Caso de Styles');
+	
+INSERT INTO Livros_Categoria (livro, categoria) VALUES
+	('As Crônicas de Nárnia', 'Fantasia'),
+	('Cartas de um Diabo a Seu Aprendiz', 'Ficção Científica'),
+	('O Senhor dos Anéis: A Sociedade do Anel', 'Fantasia'),
+	('O Hobbit', 'Fantasia'),
+	('Percy Jackson e o Ladrão de Raios', 'Fantasia'),
+	('O Herói Perdido', 'Fantasia'),
+	('Jogos Vorazes', 'Ficção Científica'),
+	('Em Chamas', 'Ficção Científica'),
+	('The Love Hypothesis', 'Romance'),
+	('Love on the Brain', 'Romance'),
+	('Os Sete Maridos de Evelyn Hugo', 'Romance'),
+	('Malibu Renasce', 'Romance'),
+	('Orgulho e Preconceito', 'Literatura Clássica'),
+	('Razão e Sensibilidade', 'Literatura Clássica'),
+	('O Encontro da Espanha', 'Histórico'),
+	('O Amor por Paris', 'Romance'),
+	('Beach Read', 'Romance'),
+	('People We Meet on Vacation', 'Romance'),
+	('Assassinato no Expresso do Oriente', 'Mistério'),
+	('Morte no Nilo', 'Mistério'),
+	('1984', 'Ficção Científica'),
+	('A Revolução dos Bichos', 'Ficção Científica'),
+	('Harry Potter e a Pedra Filosofal', 'Fantasia'),
+	('Harry Potter e a Câmara Secreta', 'Fantasia'),
+	('O Grande Gatsby', 'Literatura Clássica'),
+	('Suave é a Noite', 'Literatura Clássica'),
+	('Cem Anos de Solidão', 'Histórico'),
+	('O Amor nos Tempos do Cólera', 'Histórico'),
+	('Norwegian Wood', 'Romance'),
+	('Kafka à Beira-mar', 'Ficção Científica'),
+	('O Conto da Aia', 'Ficção Científica'),
+	('Vulgo Grace', 'Suspense'),
+	('Americanah', 'Histórico'),
+	('Meio Sol Amarelo', 'Histórico'),
+	('A Casa dos Espíritos', 'Histórico'),
+	('Paula', 'Biografia'),
+	('O Alquimista', 'Ficção Científica'),
+	('Brida', 'Fantasia'),
+	('Guerra e Paz', 'Literatura Clássica'),
+	('Anna Karenina', 'Literatura Clássica'),
+	('Perelandra', 'Ficção Científica'),
+	('Os Quatro Amores', 'Não-ficção'),
+	('O Retorno do Rei', 'Fantasia'),
+	('As Aventuras de Tom Bombadil', 'Fantasia'),
+	('A Marca de Atena', 'Fantasia'),
+	('A Sombra da Serpente', 'Fantasia'),
+	('A Esperança', 'Ficção Científica'),
+	('O Canto da Cornucópia', 'Ficção Científica'),
+	('Below Zero', 'Romance'),
+	('Stuck with You', 'Romance'),
+	('Daisy Jones & The Six', 'Romance'),
+	('Carrie Soto Está de Volta', 'Romance'),
+	('Mansfield Park', 'Literatura Clássica'),
+	('Emma', 'Literatura Clássica'),
+	('The Spanish Love Deception', 'Romance'),
+	('The American Roommate Experiment', 'Romance'),
+	('Book Lovers', 'Romance'),
+	('Happy Place', 'Romance'),
+	('O Mistério dos Sete Relógios', 'Mistério'),
+	('Morte na Praia', 'Mistério'),
+	('Homage to Catalonia', 'Histórico'),
+	('Keep the Aspidistra Flying', 'Literatura Clássica'),
+	('Harry Potter e o Prisioneiro de Azkaban', 'Fantasia'),
+	('Harry Potter e o Cálice de Fogo', 'Fantasia'),
+	('Contos da Era do Jazz', 'Literatura Clássica'),
+	('O Último Magnata', 'Literatura Clássica'),
+	('O Outono do Patriarca', 'Histórico'),
+	('Crônica de uma Morte Anunciada', 'Histórico'),
+	('1Q84', 'Ficção Científica'),
+	('Caçando Carneiros', 'Ficção Científica'),
+	('O Assassino Cego', 'Mistério'),
+	('Orix e Crake', 'Ficção Científica'),
+	('No Seu Pescoço', 'Histórico'),
+	('Zikora', 'Histórico'),
+	('De Amor e de Sombra', 'Histórico'),
+	('A Ilha Sob o Mar', 'Histórico'),
+	('Diário de um Mago', 'Ficção Científica'),
+	('O Zahir', 'Ficção Científica'),
+	('A Morte de Ivan Ilitch', 'Literatura Clássica'),
+	('Ressurreição', 'Literatura Clássica'),
+	('A Última Batalha', 'Fantasia'),
+	('O Cavalo e Seu Menino', 'Fantasia'),
+	('Silmarillion', 'Fantasia'),
+	('Os Filhos de Húrin', 'Fantasia'),
+	('O Sangue do Olimpo', 'Fantasia'),
+	('A Pirâmide Vermelha', 'Fantasia'),
+	('A Balada dos Pássaros e das Serpentes', 'Ficção Científica'),
+	('Grega', 'Ficção Científica'),
+	('The STEMinist Novellas', 'Romance'),
+	('Missão Desastre', 'Romance'),
+	('Talvez em Outro Lugar', 'Romance'),
+	('E Se Fosse a Gente?', 'Romance'),
+	('Lady Susan', 'Literatura Clássica'),
+	('Persuasão', 'Literatura Clássica'),
+	('Aconteceu Um Verão', 'Romance'),
+	('O Amor que Sinto', 'Romance'),
+	('You and Me on Vacation', 'Romance'),
+	('Noivos à Força', 'Romance'),
+	('Os Elefantes Não Esquecem', 'Mistério'),
+	('O Misterioso Caso de Styles', 'Mistério');
 
-
+--CRIAÇÃO DE VIEWS
+CREATE VIEW Livros_Autores_Categorias AS 
+SELECT 
+	l.titulo AS Livro, 
+    a.nome AS Autor, 
+    c.categoria AS Categoria
+FROM 
+	Livro l
+JOIN 
+	Livros_Categoria lc ON l.titulo = lc.livro
+JOIN 
+	Livros_Autor la ON l.titulo = la.livro
+JOIN 
+	Autor a ON la.autor = a.nome
+JOIN 
+    Categoria c ON lc.categoria = c.categoria;
+	
+-- CRIANDO FUNÇÃO 
+CREATE OR REPLACE FUNCTION Qnt_Livros_Autor(nome_autor VARCHAR)
+RETURNS int 
+AS $$ 
+DECLARE 
+	quantidade int;
+BEGIN 
+	
+	
 	
 SELECT * FROM Autor;
 SELECT * FROM Livro;
 SELECT * FROM Categoria;
 SELECT * FROM Livros_Autor;
+SELECT * FROM Livros_Categoria;
+SELECT * FROM Livros_Autores_Categorias;
