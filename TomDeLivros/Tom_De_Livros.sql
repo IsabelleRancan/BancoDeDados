@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS Livros_Categoria;
-DROP TABLE IF EXISTS Categoria;
-DROP TABLE IF EXISTS Livros_Autor;
-DROP TABLE IF EXISTS Livro;
-DROP TABLE IF EXISTS Autor;
+DROP TABLE IF EXISTS Livros_Categoria CASCADE;
+DROP TABLE IF EXISTS Categoria CASCADE;
+DROP TABLE IF EXISTS Livros_Autor CASCADE;
+DROP TABLE IF EXISTS Livro CASCADE;
+DROP TABLE IF EXISTS Autor CASCADE;
 
 --CRIANDO MINHAS TABELAS NO BANCO DE DADOS
 CREATE TABLE Autor (
@@ -377,7 +377,7 @@ INSERT INTO Livros_Categoria (livro, categoria) VALUES
 	('O Misterioso Caso de Styles', 'Mistério');
 
 --CRIAÇÃO DE VIEWS
-CREATE VIEW Livros_Autores_Categorias AS 
+CREATE OR REPLACE VIEW Livros_Autores_Categorias AS 
 SELECT 
 	l.titulo AS Livro, 
     a.nome AS Autor, 
@@ -391,21 +391,99 @@ JOIN
 JOIN 
 	Autor a ON la.autor = a.nome
 JOIN 
-    Categoria c ON lc.categoria = c.categoria;
+    Categoria c ON lc.categoria = c.categoria
+ORDER BY Livro;
 	
 -- CRIANDO FUNÇÃO 
-CREATE OR REPLACE FUNCTION Qnt_Livros_Autor(nome_autor VARCHAR)
-RETURNS int 
-AS $$ 
-DECLARE 
-	quantidade int;
-BEGIN 
-	
-	
-	
+CREATE OR REPLACE FUNCTION qnt_livros_autor(nome_autor VARCHAR)
+RETURNS TABLE (autor_nome VARCHAR, quantidade_livros INT)
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        la.autor, 
+        CAST(COUNT(la.livro) AS INT) -- Convertendo o valor retornado de bigint para int
+    FROM 
+        Livros_Autor la
+    WHERE 
+        la.autor = nome_autor
+    GROUP BY 
+        la.autor;
+END;
+$$ LANGUAGE plpgsql;
+
+-- SEGUNDA FUNÇÃO
+CREATE OR REPLACE FUNCTION Total_Paginas_Autor(nome_autor VARCHAR)
+RETURNS INT
+AS $$
+DECLARE
+    total_paginas INT;
+BEGIN
+    SELECT SUM(l.paginas) INTO total_paginas
+    FROM Livro l JOIN Livros_Autor la ON l.titulo = la.livro
+    WHERE la.autor = nome_autor;
+    RETURN COALESCE(total_paginas, 0); -- Se não encontrar livros, retorna 0.
+END;
+$$ LANGUAGE plpgsql;
+
+--CRIANDO UMA VIEW SOBRE O AUTO QUE UTILIZA OS DADOS DA FUNÇÃO ANTERIOR
+CREATE OR REPLACE VIEW Informacoes_Autor AS
+SELECT 
+    a.nome AS Autor,
+    EXTRACT(YEAR FROM AGE(a.nascimento)) AS Idade,
+    COUNT(la.livro) AS Quantidade_Livros,
+    Total_Paginas_Autor(a.nome) AS Total_Paginas
+FROM 
+    Autor a
+JOIN 
+    Livros_Autor la ON a.nome = la.autor
+GROUP BY 
+    a.nome, a.nascimento
+ORDER BY nome;
+
+-- CRIANDO TRIGGER 
+-- Mostra a data em que novos livros foram adicionados 
+CREATE OR REPLACE FUNCTION Atualiza_Data_Modificacao()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Atualiza a coluna data_modificacao com a data e hora atuais
+    NEW.data_modificacao := NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_atualiza_data_modificacao
+BEFORE UPDATE ON Livro
+FOR EACH ROW
+EXECUTE FUNCTION Atualiza_Data_Modificacao();
+
+-- verifica se um novo autor possui mais de 18 anos 
+CREATE OR REPLACE FUNCTION Verifica_Idade_Autor()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Verifica se a idade do autor é menor que 18 anos
+    IF EXTRACT(YEAR FROM AGE(NEW.data_nascimento)) < 18 THEN
+        RAISE EXCEPTION 'O autor deve ter pelo menos 18 anos';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_verifica_idade_autor
+BEFORE INSERT OR UPDATE ON Autor
+FOR EACH ROW
+EXECUTE FUNCTION Verifica_Idade_Autor();
+
+
 SELECT * FROM Autor;
 SELECT * FROM Livro;
 SELECT * FROM Categoria;
 SELECT * FROM Livros_Autor;
 SELECT * FROM Livros_Categoria;
 SELECT * FROM Livros_Autores_Categorias;
+SELECT * FROM Qnt_Livros_Autor('C.S. Lewis');
+SELECT * FROM Qnt_Livros_Autor('Agatha Christie');
+SELECT * FROM Qnt_Livros_Autor('J.K. Rowling');
+SELECT * FROM Qnt_Livros_Autor('J.R.R. Tolkien');
+SELECT Total_Paginas_Autor('Taylor Jenkins Reid');
+SELECT * FROM Informacoes_Autor;
