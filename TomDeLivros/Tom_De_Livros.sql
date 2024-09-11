@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Registro_Vendas CASCADE;
 DROP TABLE IF EXISTS Livros_Categoria CASCADE;
 DROP TABLE IF EXISTS Categoria CASCADE;
 DROP TABLE IF EXISTS Livros_Autor CASCADE;
@@ -34,6 +35,14 @@ CREATE TABLE Livros_Categoria (
 	categoria varchar(20) not null references Categoria (categoria) ON DELETE CASCADE,
 	primary key (livro, categoria)
 );
+
+CREATE TABLE Registro_Vendas (
+    id SERIAL PRIMARY KEY,  
+    livro varchar(50) not null references Livro (titulo) ON DELETE CASCADE,
+    preco numeric(5,2) not null,
+    data_venda DATE not null
+);
+
 
 -- CRIANDO OS REGISTROS DENTRO DAS TABELAS 
 INSERT INTO Autor (nome, nascimento, país, idioma) VALUES
@@ -474,6 +483,33 @@ BEFORE INSERT OR UPDATE ON Autor
 FOR EACH ROW
 EXECUTE FUNCTION Verifica_Idade_Autor();
 
+-- CRIANDO UM MILHÃO DE REGISTROS 
+CREATE OR REPLACE FUNCTION Gerar_Vendas()
+RETURNS void AS $$
+DECLARE
+    i INT;
+    livro_aleatorio RECORD;
+    data_aleatoria DATE;
+BEGIN
+    FOR i IN 1..1000000 LOOP
+        -- Seleciona um título e o preço aleatoriamente da tabela Livro
+        SELECT titulo, preco 
+        INTO livro_aleatorio
+        FROM Livro
+        ORDER BY RANDOM() 
+        LIMIT 1;
+
+        -- Gera uma data aleatória nos últimos 10 anos
+		SELECT (CURRENT_DATE - INTERVAL '1 day' * TRUNC(RANDOM() * 3650 + 1))::DATE
+        INTO data_aleatoria;
+
+        -- Insere os registros na tabela Registro_Vendas
+        INSERT INTO Registro_Vendas (livro, preco, data_venda)
+        VALUES (livro_aleatorio.titulo, livro_aleatorio.preco, data_aleatoria);
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
 
 SELECT * FROM Autor;
 SELECT * FROM Livro;
@@ -487,3 +523,5 @@ SELECT * FROM Qnt_Livros_Autor('J.K. Rowling');
 SELECT * FROM Qnt_Livros_Autor('J.R.R. Tolkien');
 SELECT Total_Paginas_Autor('Taylor Jenkins Reid');
 SELECT * FROM Informacoes_Autor;
+SELECT Gerar_Vendas();
+SELECT * FROM Registro_Vendas;
