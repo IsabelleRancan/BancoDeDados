@@ -16,7 +16,8 @@ CREATE TABLE Autor (
 CREATE TABLE Livro (
 	titulo varchar(50) not null primary key,
 	paginas int not null, 
-	preco numeric(5, 2) not null
+	preco numeric(5, 2) not null, 
+	ultima_atulizacao_preco TIMESTAMP
 );
 
 CREATE TABLE Livros_Autor (
@@ -435,7 +436,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
---CRIANDO UMA VIEW SOBRE O AUTO QUE UTILIZA OS DADOS DA FUNÇÃO ANTERIOR
+--CRIANDO UMA VIEW SOBRE O AUTOR QUE UTILIZA OS DADOS DA FUNÇÃO ANTERIOR
 CREATE OR REPLACE VIEW Informacoes_Autor AS
 SELECT 
     a.nome AS Autor,
@@ -455,8 +456,7 @@ ORDER BY nome;
 CREATE OR REPLACE FUNCTION Atualiza_Data_Modificacao()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Atualiza a coluna data_modificacao com a data e hora atuais
-    NEW.data_modificacao := NOW();
+    NEW.ultima_atulizacao_preco := NOW();
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -471,7 +471,7 @@ CREATE OR REPLACE FUNCTION Verifica_Idade_Autor()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Verifica se a idade do autor é menor que 18 anos
-    IF EXTRACT(YEAR FROM AGE(NEW.data_nascimento)) < 18 THEN
+    IF EXTRACT(YEAR FROM AGE(NEW.nascimento)) < 18 THEN
         RAISE EXCEPTION 'O autor deve ter pelo menos 18 anos';
     END IF;
     RETURN NEW;
@@ -511,17 +511,19 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-SELECT * FROM Autor;
-SELECT * FROM Livro;
-SELECT * FROM Categoria;
-SELECT * FROM Livros_Autor;
-SELECT * FROM Livros_Categoria;
-SELECT * FROM Livros_Autores_Categorias;
-SELECT * FROM Qnt_Livros_Autor('C.S. Lewis');
-SELECT * FROM Qnt_Livros_Autor('Agatha Christie');
-SELECT * FROM Qnt_Livros_Autor('J.K. Rowling');
-SELECT * FROM Qnt_Livros_Autor('J.R.R. Tolkien');
-SELECT Total_Paginas_Autor('Taylor Jenkins Reid');
-SELECT * FROM Informacoes_Autor;
-SELECT Gerar_Vendas();
-SELECT * FROM Registro_Vendas;
+--SELECT * FROM Autor;
+--SELECT * FROM Livro;
+--SELECT * FROM Categoria;
+--SELECT * FROM Livros_Autor;
+--SELECT * FROM Livros_Categoria;
+--SELECT * FROM Livros_Autores_Categorias; -- testando View 1 
+--SELECT * FROM Qnt_Livros_Autor('C.S. Lewis'); --testando função 1 
+--SELECT * FROM Qnt_Livros_Autor('Agatha Christie');
+--SELECT * FROM Qnt_Livros_Autor('J.K. Rowling');
+--SELECT * FROM Qnt_Livros_Autor('J.R.R. Tolkien');
+--SELECT Total_Paginas_Autor('Taylor Jenkins Reid'); --testando função 2
+--SELECT * FROM Informacoes_Autor; --testando view 2
+--UPDATE Livro SET preco = 34.90 WHERE titulo = 'As Crônicas de Nárnia'; --testando trigger preço
+--INSERT INTO Autor (nome, nascimento) VALUES ('Professor Edson', '2010-01-01'); --testando trigger 2
+--SELECT Gerar_Vendas(); --gerando um milhão de registros 
+--SELECT * FROM Registro_Vendas; --mostrando esses registros 
