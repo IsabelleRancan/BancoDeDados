@@ -409,10 +409,10 @@ CREATE OR REPLACE FUNCTION qnt_livros_autor(nome_autor VARCHAR)
 RETURNS TABLE (autor_nome VARCHAR, quantidade_livros INT)
 AS $$
 BEGIN
-    RETURN QUERY
+    RETURN QUERY --retorna o resultado da consulta dentro da nossa função
     SELECT 
         la.autor, 
-        CAST(COUNT(la.livro) AS INT) -- Convertendo o valor retornado de bigint para int
+        CAST(COUNT(la.livro) AS INT) -- Convertendo o valor retornado para int usando o cast
     FROM 
         Livros_Autor la
     WHERE 
@@ -452,7 +452,6 @@ GROUP BY
 ORDER BY nome;
 
 -- CRIANDO TRIGGER 
--- Mostra a data em que novos livros foram adicionados 
 CREATE OR REPLACE FUNCTION Atualiza_Data_Modificacao()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -485,10 +484,10 @@ EXECUTE FUNCTION Verifica_Idade_Autor();
 
 -- CRIANDO UM MILHÃO DE REGISTROS 
 CREATE OR REPLACE FUNCTION Gerar_Vendas()
-RETURNS void AS $$
+RETURNS void AS $$  -- não vai retornar um valor em si e sim alguma ação 
 DECLARE
     i INT;
-    livro_aleatorio RECORD;
+    livro_aleatorio RECORD; --armazena duas colunas na variável (titulo e preço)
     data_aleatoria DATE;
 BEGIN
     FOR i IN 1..1000000 LOOP
@@ -510,7 +509,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
 --SELECT * FROM Autor;
 --SELECT * FROM Livro;
 --SELECT * FROM Categoria;
@@ -524,6 +522,7 @@ $$ LANGUAGE plpgsql;
 --SELECT Total_Paginas_Autor('Taylor Jenkins Reid'); --testando função 2
 --SELECT * FROM Informacoes_Autor; --testando view 2
 --UPDATE Livro SET preco = 34.90 WHERE titulo = 'As Crônicas de Nárnia'; --testando trigger preço
---INSERT INTO Autor (nome, nascimento) VALUES ('Professor Edson', '2010-01-01'); --testando trigger 2
+--INSERT INTO Autor (nome, nascimento, país, idioma) VALUES ('Professor Edson', '2010-01-01', 'Brasil', 'Portugês'); --testando trigger 2
+--INSERT INTO Autor (nome, nascimento, país, idioma) VALUES ('Isabelle', '1990-02-02', 'Brasil', 'Portugês'); 
 --SELECT Gerar_Vendas(); --gerando um milhão de registros 
 --SELECT * FROM Registro_Vendas; --mostrando esses registros 
